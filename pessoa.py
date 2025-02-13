@@ -1,11 +1,12 @@
 class Pessoa:
-    def __init__(self, nome, data_nasc, codigo, salario=0, estudando=True, trabalhando=False):
+    def __init__(self, nome, data_nasc, codigo, salario=0, estudando=True, trabalhando=False, nivel=1):
         self.nome = nome
         self.data_nasc = data_nasc
         self.codigo = codigo
         self.estudando = estudando
         self.trabalhando = trabalhando
         self.salario = salario
+        self.nivel = nivel
         print('init', self.trabalhando)
 
 
@@ -15,6 +16,7 @@ class Pessoa:
               f'{'trabalhando' if self.trabalhando else "não trabalha" }\n'
               f'{'Estuda' if self.estudando else 'Não estuda'}\n'
               f'meu salário é {self.salario:.2f}\n'
+              f'nivel {self.nivel}'
               f'meu código é {self.codigo}')
 
         print('-*-'*10)
@@ -45,7 +47,8 @@ class Pessoa:
             else:
                 print('nenhum aumento pq nem recebe')
         else:
-            print('opa ja estudar ja')
+            self.nivel += 1
+            print(f'evoliu 1 nivel {self.nivel}')
             if self.trabalhando:
                 salario = self.salario
                 self.salario = salario + (salario / 10)
@@ -53,6 +56,8 @@ class Pessoa:
 
     def parar_estudar(self):
         if not self.estudando:
+            if self.nivel > 0:
+                self.nivel -= 1
             print('ja n estuda')
         else:
             self.estudando = False
